@@ -1,6 +1,7 @@
 package model.services;
 
 import model.entities.AluguelCarro;
+import model.entities.NotaPagamento;
 
 public class AluguelService {
 	
@@ -42,12 +43,31 @@ public class AluguelService {
 		this.taxaBrasil = taxaBrasil;
 	}
 	
-	public void processarNotaPagamento(AluguelCarro carro) {
-		if() {
-			this.getPrecoPorHora();
+	public void processarNotaPagamento(AluguelCarro carroAluguel) {
+		
+		long ini = carroAluguel.getInicioPrazo().getTime(); //milisegundos
+		long fini = carroAluguel.getFimPrazo().getTime(); //milisegundos
+		
+		double diffHoras = (double)(fini-ini) / 1000 / 60 / 60; //Casting para Double a fim de se arredondar
+		//milisegundos para segundos = dividir por 1000
+		//segundos para minutos = dividir por 60
+		//minutos para horas = dividir por 60
+				
+		double pagamentoBasicoVar;
+		
+		if(diffHoras<12.0) {
+			pagamentoBasicoVar = this.getPrecoPorHora()*Math.ceil(diffHoras);
 		}else {
-			this.getPrecoPorDia();
+			pagamentoBasicoVar = this.getPrecoPorDia()*Math.ceil(diffHoras / 24);
+			//horas para dias = dividir por 24
 		}
+		
+		double taxa = taxaBrasil.taxa(pagamentoBasicoVar);
+		//calcula valor do imposto a partir do pagamento básico
+		
+		NotaPagamento np = new NotaPagamento(pagamentoBasicoVar, taxa);
+		carroAluguel.setNotaPagamentoAssoc(np);
+		
 	}
 	
 }
