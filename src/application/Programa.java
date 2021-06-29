@@ -16,29 +16,29 @@ public class Programa {
 
 		Scanner sc = new Scanner(System.in);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		
 		
 		System.out.println("---.:| Dados do Aluguel |:.---");
 		
 		System.out.println("Entre com o modelo do carro:");
-		String modeloCarroIn = sc.next();
+		String modeloCarroIn = sc.nextLine();
 		Veiculo veiculo = new Veiculo(modeloCarroIn);
 
-		System.out.println("Data e Hora da locação: ");
-		Date inicioPrazoIn = sdf.parse(sc.next());
+		System.out.println("Data e Hora da locação (dd/MM/yyyy hh:ss) : ");
+		Date inicioPrazoIn = sdf.parse(sc.nextLine());
 			
-		System.out.println("Data e Hora do retorno: ");
-		Date fimPrazoIn = sdf.parse(sc.next());
+		System.out.println("Data e Hora do retorno (dd/MM/yyyy hh:ss) : ");
+		Date fimPrazoIn = sdf.parse(sc.nextLine());
 		
 		AluguelCarro aluguelCarro = new AluguelCarro(inicioPrazoIn, fimPrazoIn, veiculo);
 
 		
 		System.out.println("Entre com o preço por hora: ");
-		Double precoPorHora = sc.nextDouble();
+		double precoPorHora = sc.nextDouble();
 		System.out.println("Entre com o preço por dia: ");
-		Double precoPorDia = sc.nextDouble();
+		double precoPorDia = sc.nextDouble();
 		
 		TaxaBrasilService taxaBrasilService = new TaxaBrasilService();
 		AluguelService aluguelService = new AluguelService(precoPorHora, precoPorDia, taxaBrasilService);
