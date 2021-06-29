@@ -8,15 +8,15 @@ public class AluguelService {
 	private Double precoPorHora;
 	private Double precoPorDia;
 	
-	private TaxaBrasilService taxaBrasil;
+	private TaxaService taxaService;
 	
 	public AluguelService() {
 	}
 
-	public AluguelService(Double precoPorHora, Double precoPorDia, TaxaBrasilService taxaBrasil) {
+	public AluguelService(Double precoPorHora, Double precoPorDia, TaxaService taxaService) {
 		this.precoPorHora = precoPorHora;
 		this.precoPorDia = precoPorDia;
-		this.taxaBrasil = taxaBrasil;
+		this.taxaService = taxaService;
 	}
 
 	public Double getPrecoPorHora() {
@@ -35,12 +35,12 @@ public class AluguelService {
 		this.precoPorDia = precoPorDia;
 	}
 
-	public TaxaBrasilService getTaxaBrasil() {
-		return taxaBrasil;
+	public TaxaService getTaxaBrasil() {
+		return taxaService;
 	}
 
-	public void setTaxaBrasil(TaxaBrasilService taxaBrasil) {
-		this.taxaBrasil = taxaBrasil;
+	public void setTaxaService(TaxaService taxaService) {
+		this.taxaService = taxaService;
 	}
 	
 	public void processarNotaPagamento(AluguelCarro carroAluguel) {
@@ -62,7 +62,7 @@ public class AluguelService {
 			//horas para dias = dividir por 24
 		}
 		
-		double taxa = taxaBrasil.taxa(pagamentoBasicoVar);
+		double taxa = taxaService.taxa(pagamentoBasicoVar);
 		//calcula valor do imposto a partir do pagamento básico
 		
 		NotaPagamento np = new NotaPagamento(pagamentoBasicoVar, taxa);

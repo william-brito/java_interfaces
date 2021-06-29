@@ -40,7 +40,7 @@ public class Programa {
 		double precoPorDia = sc.nextDouble();
 		
 		TaxaBrasilService taxaBrasilService = new TaxaBrasilService();
-		AluguelService aluguelService = new AluguelService(precoPorHora, precoPorDia, taxaBrasilService);
+		AluguelService aluguelService = new AluguelService(precoPorHora, precoPorDia, taxaBrasilService);//UPCASTING do taxaBrasilService com TaxService
 		aluguelService.processarNotaPagamento(aluguelCarro);
 				
 		System.out.println("---.:| NOTA DE PAGMENTO |:.---");
