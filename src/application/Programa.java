@@ -33,7 +33,6 @@ public class Programa {
 		Date fimPrazoIn = sdf.parse(sc.nextLine());
 		
 		AluguelCarro aluguelCarro = new AluguelCarro(inicioPrazoIn, fimPrazoIn, veiculo);
-
 		
 		System.out.println("Entre com o preço por hora: ");
 		double precoPorHora = sc.nextDouble();
@@ -43,8 +42,7 @@ public class Programa {
 		TaxaBrasilService taxaBrasilService = new TaxaBrasilService();
 		AluguelService aluguelService = new AluguelService(precoPorHora, precoPorDia, taxaBrasilService);
 		aluguelService.processarNotaPagamento(aluguelCarro);
-		
-		
+				
 		System.out.println("---.:| NOTA DE PAGMENTO |:.---");
 		
 		System.out.println("Pagamento Básico: "+aluguelCarro.getNotaPagamentoAssoc().getPagamentoBasico());
